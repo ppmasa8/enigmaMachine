@@ -1,4 +1,4 @@
-ALPHABET = "abcdefghijklmnoppqrstuvwxyz".upcase.split("")
+ALPHABET = "abcdefghijklmnoppqrstuvwxyz".upcase.chars
 
 class PlugBoard
     attr_accessor :alphabet, :forward_map, :backward_map
@@ -7,7 +7,7 @@ class PlugBoard
         @alphabet = ALPHABET
         @forward_map = {}
         @backward_map = {}
-        mapping(map_alphabet.split(""))
+        mapping(map_alphabet.chars)
     end
 
     def mapping(map_alphabet)
