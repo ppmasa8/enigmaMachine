@@ -1,4 +1,4 @@
-require "./enigma"
+require "./plug_board"
 
 def main
     plug_board = PlugBoard.new("BADC")

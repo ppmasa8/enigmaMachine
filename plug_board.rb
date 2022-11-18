@@ -26,5 +26,4 @@ class PlugBoard
         char = self.backward_map[char]
         self.alphabet.index(char)
     end
-    
 end
