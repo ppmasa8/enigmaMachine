@@ -1,35 +1,32 @@
 require "./plug_board"
 require "./rotor"
 require "./reflector"
+require "./enigma_machine"
 
 def main
-    # CHECK PlugBoard class
-    #
-    # plug_board = PlugBoard.new("BADC")
-    # encrypted_idx = plug_board.forward(ALPHABET.index("A"))
-    # p ALPHABET[encrypted_idx]
-    # decrepted = ALPHABET[plug_board.backward(encrypted_idx)]
-    # p decrepted
+    n = ALPHABET.size - 1
+    get_random_alphabet = (n+1).times.map{ ALPHABET[rand(n)] }.join("")
+    pl = PlugBoard.new(get_random_alphabet)
+    r1 = Rotor.new(get_random_alphabet, 3)
+    r2 = Rotor.new(get_random_alphabet, 2)
+    r3 = Rotor.new(get_random_alphabet, 1)
 
-    # CHECK Rotor class
-    #
-    # rotor = Rotor.new("BADC", 1)
-    # encrypted_idx = rotor.forward(ALPHABET.index("A"))
-    # p ALPHABET[encrypted_idx]
-    # decrepted = ALPHABET[rotor.backward(encrypted_idx)]
-    # p decrepted
-    #
-    # rotor.rotate()
-    #
-    # encrypted_idx = rotor.forward(ALPHABET.index("A"))
-    # p ALPHABET[encrypted_idx]
-    # decrepted = ALPHABET[rotor.backward(encrypted_idx)]
-    # p decrepted
+    r = ALPHABET
+    p indexes = Array.new(n+1){|i| i }
+    p indexes.size
+    (0...indexes.size/2).each do |_|
+        x = indexes.slice!(rand(indexes.size - 1))
+        y = indexes.slice!(rand(indexes.size - 1))
+        r[x], r[y] = r[y], r[x]
+    end
+    reflector = Reflector.new(r.join(""))
 
-    # CHECK Reflector class
-    r = Reflector.new("BADC")
-    i = r.reflect(ALPHABET.index('C'))
-    p ALPHABET[i]
+    machine = EnigmaMachine.new(
+        pl, [r1, r2, r3], reflector
+    )
+    s = 'ATTACK SILICON VALLEY'
+    e = machine.encrypt(s)
+    puts e
 end
 
 main()

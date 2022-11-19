@@ -1,4 +1,4 @@
-ALPHABET = "abcdefghijklmnoppqrstuvwxyz".upcase.chars
+ALPHABET = "abcdefghijklmnopqrstuvwxyz".upcase.chars
 
 class PlugBoard
     attr_accessor :alphabet, :forward_map, :backward_map
@@ -11,8 +11,8 @@ class PlugBoard
     end
 
     def mapping(map_alphabet)
-        self.forward_map = Hash[alphabet.zip(map_alphabet)].compact
-        self.backward_map = forward_map.invert
+        self.forward_map = Hash[self.alphabet.zip(map_alphabet)].compact
+        self.backward_map = self.forward_map.invert
     end
 
     def forward(idx)
