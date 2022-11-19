@@ -1,10 +1,10 @@
-ALPHABET = "abcdefghijklmnopqrstuvwxyz".upcase.chars
+ALPHABET = "abcdefghijklmnopqrstuvwxyz".upcase.chars.freeze
 
 class PlugBoard
     attr_accessor :alphabet, :forward_map, :backward_map
 
     def initialize(map_alphabet)
-        @alphabet = ALPHABET
+        @alphabet = ALPHABET.dup
         @forward_map = {}
         @backward_map = {}
         mapping(map_alphabet.chars)

@@ -11,20 +11,21 @@ class EnigmaMachine
         text.chars.each.map{|c| self.go_through(c)}.join("")
     end
 
-    def decrept(text)
-        self.rotors.each do |rotor|
-            rotor.reset
-        end
+    def decrypt(text)
+        self.rotors.each{|rotor| rotor.reset}
         text.chars.each.map{|c| self.go_through(c)}.join("")
     end
 
     def go_through(char)
-        char = char.upcase
+        char.upcase!
         char.chars.each do |a|
-            return char unless ALPHABET.include?(a)
+            return char if !ALPHABET.include?(a)
         end
 
         idx = ALPHABET.index(char)
+
+        p "index番号 IDX: #{idx}"
+
         idx = self.plug_board.forward(idx)
 
         p "プラグボードを通った IDX: #{idx}"

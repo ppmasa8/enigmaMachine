@@ -8,7 +8,7 @@ class Rotor < PlugBoard
     end
 
     def rotate(offset=nil)
-        offset = self.offset unless offset
+        offset = self.offset if !offset
         self.alphabet = self.alphabet[offset..] + self.alphabet[..offset]
         self.rotations += offset
         self.rotations
